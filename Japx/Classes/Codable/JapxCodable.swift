@@ -10,7 +10,7 @@ import Foundation
 /// Protocol that extends Decodable with required properties for JSON:API objects
 public protocol JapxDecodable: Decodable {
     var type: String { get }
-    var id: String { get }
+    var id: Int { get }
 }
 
 /// Protocol that extends Encodable with required properties for JSON:API objects
