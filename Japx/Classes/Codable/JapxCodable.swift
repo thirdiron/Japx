@@ -20,8 +20,12 @@ public protocol JapxEncodable: Encodable {
 
 public typealias JapxCodable = JapxDecodable & JapxEncodable
 
-public struct JapxId: Decodable, Equatable {
+public struct JapxId: Codable, Equatable {
     public let string: String
+    
+    public init(value: String) {
+        string = value
+    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -34,6 +38,11 @@ public struct JapxId: Decodable, Equatable {
             stringValue = String(intValue)
         }
         string = stringValue
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(string)
     }
 }
 
