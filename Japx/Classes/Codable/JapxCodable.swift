@@ -10,7 +10,7 @@ import Foundation
 /// Protocol that extends Decodable with required properties for JSON:API objects
 public protocol JapxDecodable: Decodable {
     var type: String { get }
-    var id: String { get }
+    var id: Id { get }
 }
 
 /// Protocol that extends Encodable with required properties for JSON:API objects
@@ -19,6 +19,25 @@ public protocol JapxEncodable: Encodable {
 }
 
 public typealias JapxCodable = JapxDecodable & JapxEncodable
+
+public struct Id: Decodable {
+    let string: String
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        
+        let stringValue: String
+        do {
+            stringValue = try container.decode(String.self)
+        } catch DecodingError.typeMismatch {
+            let intValue = try container.decode(Int.self)
+            stringValue = String(intValue)
+        }
+        string = stringValue
+    }
+}
+
+
 
 /// Wrapper around JSONEncoder capable of encoding normal objects into JSON:API dictionaries
 public final class JapxEncoder {
