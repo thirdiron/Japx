@@ -581,7 +581,7 @@ private extension Dictionary where Key == String {
     }
     
     func extractTypeIdPair() throws -> TypeIdPair {
-        if let id = self[Consts.APIKeys.id] as? Id, let type = self[Consts.APIKeys.type] as? String {
+        if let id = self[Consts.APIKeys.id] as? JapxId, let type = self[Consts.APIKeys.type] as? String {
             return TypeIdPair(type: type, id: id.string)
         }
         throw JapxError.notFoundTypeOrId(data: self)
@@ -628,7 +628,7 @@ private extension NSDictionary {
     }
     
     func extractTypeIdPair() throws -> TypeIdPair {
-        if let id = self.object(forKey: Consts.APIKeys.id) as? Id, let type = self.object(forKey: Consts.APIKeys.type) as? String {
+        if let id = self.object(forKey: Consts.APIKeys.id) as? JapxId, let type = self.object(forKey: Consts.APIKeys.type) as? String {
             return TypeIdPair(type: type, id: id.string)
         }
         throw JapxError.notFoundTypeOrId(data: self)

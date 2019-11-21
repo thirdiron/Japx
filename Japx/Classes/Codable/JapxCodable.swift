@@ -10,7 +10,7 @@ import Foundation
 /// Protocol that extends Decodable with required properties for JSON:API objects
 public protocol JapxDecodable: Decodable {
     var type: String { get }
-    var id: Id { get }
+    var id: JapxId { get }
 }
 
 /// Protocol that extends Encodable with required properties for JSON:API objects
@@ -20,7 +20,7 @@ public protocol JapxEncodable: Encodable {
 
 public typealias JapxCodable = JapxDecodable & JapxEncodable
 
-public struct Id: Decodable, Equatable {
+public struct JapxId: Decodable, Equatable {
     public let string: String
     
     public init(from decoder: Decoder) throws {
